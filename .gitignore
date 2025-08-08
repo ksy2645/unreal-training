@@ -1,0 +1,81 @@
+# =========================
+# Unreal Engine .gitignore
+# Minimal Source-Only Upload
+# =========================
+
+# Build artifacts
+*/[Bb]inaries/
+*/DerivedDataCache/
+*/Intermediate/
+*/Saved/
+*/Build/
+
+# IDE / Editor
+.vs/
+.vscode/
+.idea/
+*.VC.db
+*.VC.opendb
+*.sln
+*.suo
+*.user
+*.userprefs
+*.opensdf
+*.sdf
+*.zip
+
+# OS Misc
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Ignore all assets
+# *.uasset
+# *.umap
+
+# --- Exceptions: Keep BP/UI/DataTable logic assets ---
+# (Unreal binary assets for Blueprints, UI widgets, DataTables)
+#!Content/**/Blueprints/**/*.uasset
+#!Content/**/UI/**/*.uasset
+#!Content/**/UIComponent/**/*.uasset
+#!Content/**/UIMaterialLab/**/*.uasset
+#!Content/**/Materials/**/*.uasset
+#!Content/**/MaterialInstances/**/*.uasset
+#!Content/**/MaterialFunctions/**/*.uasset
+#!Content/**/DataTables/**/*.uasset
+
+# Plugins binaries/intermediate
+*/Plugins/*/Binaries/
+*/Plugins/*/Intermediate/
+*/Plugins/*/DerivedDataCache/
+*/Plugins/*/Saved/
+*/Plugins/*/Build/
+
+# Logs / Crashes
+*.log
+*.dmp
+*/Saved/Logs/
+*/Saved/Crashes/
+
+# Ignore built executables
+*.exe
+*.app
+*.ipa
+*.apk
+*.aab
+*.dmg
+*.so
+*.dll
+*.lib
+*.pdb
+
+# Ignore Custom Folder
+Assets/
+SteamSDK/
+
+# Ignore Custom File
+AutoGitInit.bat
+AutoGitPush.bat
+
+# Svn metadata
+.svn/
