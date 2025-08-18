@@ -3,3 +3,7 @@
 
 #include "UserInventory.h"
 
+void UUserInventory::NativePreConstruct()
+{
+	Super::NativePreConstruct();
+}
