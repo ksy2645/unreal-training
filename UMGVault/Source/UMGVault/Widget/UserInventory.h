@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "Blueprint/UserWidget.h"
+#include "Engine/StreamableManager.h"
 #include "UserInventory.generated.h"
 
 /**
@@ -16,4 +17,8 @@ class UMGVAULT_API UUserInventory : public UUserWidget
 	
 protected:
 	virtual void NativePreConstruct() override;
+	virtual void NativeOnInitialized() override;
+
+private:
+	TSharedPtr<FStreamableHandle> LoadHandle;
 };
