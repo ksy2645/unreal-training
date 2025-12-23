@@ -1,0 +1,6 @@
+Name,ItemId,DisplayName,Description,Type,Rarity,MaxStack,Weight,Price,Icon,PickupMesh
+iron_ore,iron_ore,Iron Ore,Ore for smelting,Material,Common,99,0,30,/Game/UI/Icons/T_iron_ore,
+potion_small,potion_small,Small Potion,Restores a small amount,Consumable,Uncommon,20,0,120,/Game/UI/Icons/T_potion,
+sword_long_01,sword_long_01,Longsword I,Basic longsword,Equipment,Rare,1,0,980,/Game/UI/Icons/T_sword,
+gem_mythic,gem_mythic,Mythic Gem,Shines intensely,Material,Mythic,99,0,5000,/Game/UI/Icons/T_gem,
+relic_ancient,relic_ancient,Ancient Relic,Very old relic,Quest,Ancient,1,0,0,/Game/UI/Icons/T_relic,

@@ -23,6 +23,7 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 	void SetItemId(const FPrimaryAssetId InId);
+	UFUNCTION(BlueprintCallable)
 	void SetItemDef(class UItemDef* Def);
 
 protected:
@@ -30,6 +31,7 @@ protected:
 	virtual void NativePreConstruct() override;
 	virtual void NativeConstruct() override;
 	virtual void NativeDestruct() override;
+	virtual void NativeOnListItemObjectSet(UObject* ListItemObject) override;
 
 	UPROPERTY(meta=(BindWidget))
 	class UImage* Image_Icon;

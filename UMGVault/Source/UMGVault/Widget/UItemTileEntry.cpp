@@ -48,7 +48,7 @@ void UUItemTileEntry::NativePreConstruct()
 		{
 			Def = PreviewItemDef.LoadSynchronous();
 		}
-		else if (ItemId.IsValid() && UAssetManager::IsValid())
+		else if (ItemId.IsValid() && UAssetManager::IsInitialized())
 		{
 			const FSoftObjectPath Path = UAssetManager::Get().GetPrimaryAssetPath(ItemId);
 			Def = Cast<UItemDef>(Path.TryLoad());
@@ -95,6 +95,20 @@ void UUItemTileEntry::NativeDestruct()
 
 	Super::NativeDestruct();
 }
+
+void UUItemTileEntry::NativeOnListItemObjectSet(UObject* ListItemObject)
+{
+	// Super::NativeOnListItemObjectSet(ListItemObject);
+	if (UItemDef* Def = Cast<UItemDef>(ListItemObject))
+	{
+		SetItemDef(Def);
+	}
+	else
+	{
+		ApplyPlaceholder();
+	}
+}
+
 
 void UUItemTileEntry::SetItemId(const FPrimaryAssetId InId)
 {

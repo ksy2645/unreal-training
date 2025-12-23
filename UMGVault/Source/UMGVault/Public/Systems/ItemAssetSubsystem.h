@@ -20,12 +20,19 @@ class UMGVAULT_API UItemAssetSubsystem : public UGameInstanceSubsystem
 	GENERATED_BODY()
 public:
 	using FOnDefReady = TFunction<void(UItemDef*)>;
+	using FOnDefsReady = TFunction<void(const TMap<FPrimaryAssetId, UItemDef*>&)>;
 
 	TSharedPtr<FStreamableHandle> LoadItemDefAsync(
 		const FPrimaryAssetId& Id,
 		const TArray<FName>& Bundles,
 		TWeakObjectPtr<UObject> Owner,
 		FOnDefReady OnReady);
+
+	TSharedPtr<FStreamableHandle> LoadItemDefAsync(
+		const TArray<FPrimaryAssetId>& Ids,
+		const TArray<FName>& Bundles,
+		TWeakObjectPtr<UObject> Owner,
+		FOnDefsReady OnReady);
 
 	void CancelByOwner(UObject* Owner);
 

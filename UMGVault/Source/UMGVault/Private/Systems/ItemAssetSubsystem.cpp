@@ -30,9 +30,29 @@ TSharedPtr<FStreamableHandle> UItemAssetSubsystem::LoadItemDefAsync(const FPrima
 	TSharedPtr<FStreamableHandle> Handle = AM.LoadPrimaryAsset(
 		Id, Bundles,
 		FStreamableDelegate::CreateUObject(this, &UItemAssetSubsystem::OnLoaded, Id));
+
 	InFlight.Add(Id, AM.GetPrimaryAssetHandle(Id, true));
 
 	return Handle;
+}
+
+TSharedPtr<FStreamableHandle> UItemAssetSubsystem::LoadItemDefAsync(const TArray<FPrimaryAssetId>& Ids, const TArray<FName>& Bundles, TWeakObjectPtr<UObject> Owner, FOnDefReady OnReady)
+{
+	TMap<FPrimaryAssetId, TWeakObjectPtr<UItemDef>> TempCache;
+	for (const FPrimaryAssetId& Id : Ids)
+	{
+		if (UItemDef* Cached = Cache.FindRef(Id).Get())
+		{
+			if (OnReady)
+			{
+				OnReady(Cached);
+			}
+			continue;
+		}
+		Waiters.FindOrAdd(Id).Add({ Owner, OnReady });
+	}
+
+	return TSharedPtr<FStreamableHandle>();
 }
 
 void UItemAssetSubsystem::CancelByOwner(UObject* Owner)
@@ -52,8 +72,7 @@ void UItemAssetSubsystem::OnLoaded(const FPrimaryAssetId Id)
 	TSharedPtr<FStreamableHandle> Handle = InFlight.FindRef(Id);
 	InFlight.Remove(Id);
 
-	UObject* Obj = UAssetManager::Get().GetPrimaryAssetObject(Id);
-	UItemDef* Def = Cast<UItemDef>(Obj);
+	UItemDef* Def = UAssetManager::Get().GetPrimaryAssetObject<UItemDef>(Id);
 	if (Def)
 	{
 		Cache.Add(Id, Def);
