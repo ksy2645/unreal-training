@@ -122,14 +122,14 @@ void UUItemTileEntry::SetItemId(const FPrimaryAssetId InId)
 	{
 		auto* Items = GI->GetSubsystem<UItemAssetSubsystem>();
 
-		DefHandle = Items->LoadItemDefAsync(InId, { FName("UI")}, this,
-			[this, InId](UItemDef* Def)
+		DefHandle = Items->LoadItemDefAsync(InId, { FName("UI") }, this,
+			FOnItemDefLoaded::CreateLambda([this, InId](UItemDef* Def)
 			{
 				if (!IsValid(this) || !Def || InId != PendingId)
 					return;
 
 				SetItemDef(Def);
-			});
+			}));
 	}
 }
 

@@ -78,7 +78,7 @@ void UInventoryItemPusherWidget::RefreshItemIdList()
 			PendingItemDefsToLoad++;
 			// 비동기적으로 아이템이 로드 되기 때문에 순서가 보장되지 않는다.
 			Items->LoadItemDefAsync(Id, { FName("UI") }, this,
-				[this, Id](UItemDef* Def)
+				FOnItemDefLoaded::CreateLambda([this, Id](UItemDef* Def)
 				{
 					if (!IsValid(this))
 					{
@@ -93,7 +93,7 @@ void UInventoryItemPusherWidget::RefreshItemIdList()
 						UE_LOG(LogTemp, Warning, TEXT("UInventoryItemPusherWidget::RefreshItemIdList: All ItemDefs Loaded"));
 						FinalizeItemList();
 					}
-				});
+				}));
 		}
 	}
 
